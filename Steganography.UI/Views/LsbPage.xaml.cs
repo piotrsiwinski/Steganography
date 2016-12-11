@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Steganography.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LsbPage.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class LsbPage : Page
     {
-        public MainWindow()
+        public LsbPage()
         {
             InitializeComponent();
         }

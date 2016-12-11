@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace Steganography.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainPage : Page
     {
-        public MainWindow()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void LsbButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new LsbPage());
+        }
+
+        private void PatchworkButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new PatchworkPage());
         }
     }
 }
