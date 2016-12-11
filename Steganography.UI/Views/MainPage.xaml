@@ -11,7 +11,7 @@
 
     <Grid HorizontalAlignment="Center">
         <Label Content="Steganography" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Dostępne opcje:" HorizontalAlignment="Center" Margin="80,50,27,0" VerticalAlignment="Top" Width="148"/>
+        <Label Content="Available algorithms:" HorizontalAlignment="Center" Margin="80,50,27,0" VerticalAlignment="Top" Width="148"/>
         <Button x:Name="LsbButton" FontSize="16" Content="Least Significant Bit" Margin="80,80,27,0" VerticalAlignment="Top" Height="100" Click="LsbButton_Click"/>
         <Button x:Name="PatchworkButton" FontSize="16"  Content="Patchwork" Margin="80,185,27,0" VerticalAlignment="Top" Height="100" Click="PatchworkButton_Click"/>
         

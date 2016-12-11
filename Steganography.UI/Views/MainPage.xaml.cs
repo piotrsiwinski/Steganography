@@ -23,6 +23,7 @@ namespace Steganography.UI.Views
         public MainPage()
         {
             InitializeComponent();
+            
         }
 
         private void LsbButton_Click(object sender, RoutedEventArgs e)
