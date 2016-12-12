@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   mc:Ignorable="d"
         Title="MainWindow" Source="MainPage.xaml"
-                  WindowState="Maximized"
-                  MinHeight="1024" MinWidth="768">
+                  WindowState="Normal"
+                  MinHeight="800" MinWidth="600">
    
 </NavigationWindow>
