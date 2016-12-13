@@ -16,6 +16,11 @@ namespace Steganography.UI.Algorithms
 
         public Bitmap EmbedText(string text, Bitmap bmp)
         {
+            if (text.Length > bmp.Height*bmp.Width/3)
+            {
+                MessageBox.Show("Tekst jest za dlugi");
+                return bmp;
+            }
             // initially, we'll be hiding characters in the image
             State state = State.Hiding;
 

@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using Steganography.UI.Algorithms;
 
@@ -24,9 +14,10 @@ namespace Steganography.UI.Views
     /// </summary>
     public partial class LsbPage : Page
     {
-        private BitmapImage _originalBitmap;
+        private BitmapImage _originalBitmapImage;
         private BitmapImage _encryptedBitmapOld;
         private Bitmap _encryptedBitmap;
+        private Bitmap _originalBitmap;
         private SteganographyHelper _steganographyHelper;
         public LsbPage()
         {
@@ -64,8 +55,9 @@ namespace Steganography.UI.Views
 
             if (openFileDialog.ShowDialog() == true)
             {
-                _originalBitmap = new BitmapImage(new Uri(openFileDialog.FileName));
-                OriginalImage.Source = _originalBitmap;
+                _originalBitmapImage = new BitmapImage(new Uri(openFileDialog.FileName));
+                _originalBitmap = BitmapImage2Bitmap(_originalBitmapImage);
+                OriginalImage.Source = _originalBitmapImage;
             }
         }
 
@@ -99,10 +91,10 @@ namespace Steganography.UI.Views
 
         private void EncryptMessageButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_originalBitmap != null)
+            if (_originalBitmapImage != null)
             {
-                Bitmap myBitmap = BitmapImage2Bitmap(_originalBitmap);
-                _encryptedBitmap = _steganographyHelper.EmbedText(MessageTextBox.Text, BitmapImage2Bitmap(_originalBitmap));
+                Bitmap myBitmap = BitmapImage2Bitmap(_originalBitmapImage);
+                _encryptedBitmap = _steganographyHelper.EmbedText(MessageTextBox.Text, BitmapImage2Bitmap(_originalBitmapImage));
                 EncryptedImage.Source = ToBitmapSource(_encryptedBitmap);
             }
         }
@@ -110,6 +102,28 @@ namespace Steganography.UI.Views
         private void DecryptMessageButton_OnClick(object sender, RoutedEventArgs e)
         {
             var result = _steganographyHelper.ExtractText(_encryptedBitmap);
+            EncryptedMessageTextBox.Text = result;
+        }
+
+        private void SaveImageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Select a picture",
+                Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                         "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                         "Portable Network Graphic (*.png)|*.png"
+            };
+
+            if (saveFileDialog.ShowDialog() != true) return;
+            _encryptedBitmap.Save(saveFileDialog.FileName);
+
+        }
+
+        private void DecryptMessageButton2_OnClick(object sender, RoutedEventArgs e)
+        {
+            var result = _steganographyHelper.ExtractText(_originalBitmap);
             EncryptedMessageTextBox.Text = result;
         }
     }
